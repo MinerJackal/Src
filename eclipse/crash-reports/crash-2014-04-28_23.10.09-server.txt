@@ -1,0 +1,70 @@
+---- Minecraft Crash Report ----
+// My bad.
+
+Time: 14/04/28 23:10
+Description: Ticking memory connection
+
+java.lang.NullPointerException: Ticking memory connection
+	at net.minecraft.entity.player.EntityPlayerMP.displayGUIChest(EntityPlayerMP.java:733)
+	at com.mods.kina.ThunderSword.misc.ItemTileWatcher.onItemRightClick(ItemTileWatcher.java:50)
+	at net.minecraft.item.ItemStack.useItemRightClick(ItemStack.java:165)
+	at net.minecraft.server.management.ItemInWorldManager.tryUseItem(ItemInWorldManager.java:341)
+	at net.minecraft.network.NetHandlerPlayServer.processPlayerBlockPlacement(NetHandlerPlayServer.java:572)
+	at net.minecraft.network.play.client.C08PacketPlayerBlockPlacement.processPacket(C08PacketPlayerBlockPlacement.java:74)
+	at net.minecraft.network.play.client.C08PacketPlayerBlockPlacement.processPacket(C08PacketPlayerBlockPlacement.java:122)
+	at net.minecraft.network.NetworkManager.processReceivedPackets(NetworkManager.java:232)
+	at net.minecraft.network.NetworkSystem.networkTick(NetworkSystem.java:182)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:716)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:604)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:118)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:482)
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:742)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at net.minecraft.entity.player.EntityPlayerMP.displayGUIChest(EntityPlayerMP.java:733)
+	at com.mods.kina.ThunderSword.misc.ItemTileWatcher.onItemRightClick(ItemTileWatcher.java:50)
+	at net.minecraft.item.ItemStack.useItemRightClick(ItemStack.java:165)
+	at net.minecraft.server.management.ItemInWorldManager.tryUseItem(ItemInWorldManager.java:341)
+	at net.minecraft.network.NetHandlerPlayServer.processPlayerBlockPlacement(NetHandlerPlayServer.java:572)
+	at net.minecraft.network.play.client.C08PacketPlayerBlockPlacement.processPacket(C08PacketPlayerBlockPlacement.java:74)
+	at net.minecraft.network.play.client.C08PacketPlayerBlockPlacement.processPacket(C08PacketPlayerBlockPlacement.java:122)
+	at net.minecraft.network.NetworkManager.processReceivedPackets(NetworkManager.java:232)
+
+-- Ticking connection --
+Details:
+	Connection: net.minecraft.network.NetworkManager@136cf
+Stacktrace:
+	at net.minecraft.network.NetworkSystem.networkTick(NetworkSystem.java:182)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:716)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:604)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:118)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:482)
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:742)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.2
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.7.0_45, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 804890728 bytes (767 MB) / 1056309248 bytes (1007 MB) up to 1056309248 bytes (1007 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	AABB Pool Size: 3708 (207648 bytes; 0 MB) allocated, 3272 (183232 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 12, tallocated: 94
+	FML: MCP v9.01-pre FML v7.2.156.1060 Minecraft Forge 10.12.1.1060 6 mods loaded, 6 mods active
+	mcp{8.09} [Minecraft Coder Pack] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	FML{7.2.156.1060} [Forge Mod Loader] (forgeSrc-1.7.2-10.12.1.1060.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	Forge{10.12.1.1060} [Minecraft Forge] (forgeSrc-1.7.2-10.12.1.1060.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	moonlightdetector{1.0.0} [moonlightdetector] (forge-1.7.2-10.12.0.1060) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	kina_tsmod{1.3} [kina_tsmod] (forge-1.7.2-10.12.0.1060) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	kinamod{1.0} [kinamod] (forge-1.7.2-10.12.0.1060) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available->Available->Available
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 2269 (127064 bytes; 0 MB) allocated, 1802 (100912 bytes; 0 MB) used
+	Player Count: 1 / 8; [EntityPlayerMP['ForgeDevName'/683, l='New World', x=89.50, y=69.00, z=247.50]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

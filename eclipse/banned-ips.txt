@@ -1,0 +1,3 @@
+# Updated 14/04/19 20:28 by Minecraft 1.7.2
+# victim name | ban date | banned by | banned until | reason
+
