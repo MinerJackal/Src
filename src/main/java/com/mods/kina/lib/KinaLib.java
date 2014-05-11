@@ -15,6 +15,7 @@ import java.util.Random;
 public class KinaLib{
     public World world;
     public static int h;
+
     public KinaLib(){
         super();
     }
@@ -25,33 +26,33 @@ public class KinaLib{
      block from being re-rendered, if this is a client world. Flags can be added together.
      */
     public boolean setOnBlock(int x, int y, int z, Block block, World world, EntityPlayer player, ItemStack itemStack, int side, int metadata, int flags){
-        if (side == 0) {
+        if(side == 0){
             --y;
         }
 
-        if (side == 1) {
+        if(side == 1){
             ++y;
         }
 
-        if (side == 2) {
+        if(side == 2){
             --z;
         }
 
-        if (side == 3) {
+        if(side == 3){
             ++z;
         }
 
-        if (side == 4) {
+        if(side == 4){
             --x;
         }
 
-        if (side == 5) {
+        if(side == 5){
             ++x;
         }
 
-        if (!player.canPlayerEdit(x, y, z, side, itemStack)) {
+        if(!player.canPlayerEdit(x, y, z, side, itemStack)){
             return false;
-        } else {
+        }else{
             world.setBlock(x, y, z, block, metadata, flags);
             return true;
         }
@@ -66,27 +67,28 @@ public class KinaLib{
         Random rand = new Random();
         EntityLightningBolt entitylightningbolt = new EntityLightningBolt(world, x, y, z);
         world.spawnEntityInWorld(entitylightningbolt);
-        if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doFireTick") && (world.difficultySetting == EnumDifficulty.PEACEFUL || world.difficultySetting == EnumDifficulty.EASY) && world.doChunksNearChunkExist(MathHelper.floor_double((double) x), MathHelper.floor_double((double) y), MathHelper.floor_double((double) z), 10)) {
+        if(!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doFireTick") && (world.difficultySetting == EnumDifficulty.PEACEFUL || world.difficultySetting == EnumDifficulty.EASY) && world.doChunksNearChunkExist(MathHelper.floor_double((double) x), MathHelper.floor_double((double) y), MathHelper.floor_double((double) z), 10)){
             int i = MathHelper.floor_double((double) x);
             int j = MathHelper.floor_double((double) y);
             int k = MathHelper.floor_double((double) z);
 
-            if (world.getBlock(i, j, k).getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(world, i, j, k)) {
+            if(world.getBlock(i, j, k).getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(world, i, j, k)){
                 world.setBlock(i, j, k, Blocks.fire);
             }
 
-            for (i = 0; i < 4; ++i) {
+            for(i = 0; i < 4; ++i){
                 j = MathHelper.floor_double((double) x) + rand.nextInt(3) - 1;
                 k = MathHelper.floor_double((double) y) + rand.nextInt(3) - 1;
                 int l = MathHelper.floor_double((double) z) + rand.nextInt(3) - 1;
 
-                if (world.getBlock(j, k, l).getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(world, j, k, l)) {
+                if(world.getBlock(j, k, l).getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(world, j, k, l)){
                     world.setBlock(j, k, l, Blocks.fire);
                 }
             }
         }
         return true;
     }
+
     /*public boolean isAirOverBlock(Block block,World world,int x,int y,int z){
         h=y;
         boolean flag1=true;

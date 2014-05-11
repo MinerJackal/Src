@@ -52,7 +52,7 @@ public class ThunderSwordCore{
     public static Item itemTimeSword;
     public static Item itemFireSword;
 
-    //public static Item itemEnderBow;
+    public static Item itemEnderBow;
     public static Item itemWaterSword;
     public static Item itemLavaSword;
     public static Item itemInfinityCobblePickaxe;
@@ -88,7 +88,7 @@ public class ThunderSwordCore{
         itemMycelPart = (new ItemMycelPart());
         itemEdibleSword = (new ItemEdibleSword(5));
         itemTileWatcher = (new ItemTileWatcher());
-        //itemEnderBow=(new ItemEnderBow());
+        itemEnderBow = (new ItemCraftSword());
 
 
         GameRegistry.registerItem(itemThunderSword, "kina_itemThunderSword");
@@ -112,7 +112,7 @@ public class ThunderSwordCore{
         GameRegistry.registerItem(itemMycelPart, "kina_itemMycelPart");
         GameRegistry.registerItem(itemEdibleSword, "kina_itemEdibleSword");
         GameRegistry.registerItem(itemTileWatcher, "kina_itemTileWatcher");
-        //GameRegistry.registerItem(itemEnderBow,"kina_itemEnderBow");
+        GameRegistry.registerItem(itemEnderBow, "kina_itemEnderBow");
     }
 
     @EventHandler
@@ -127,7 +127,7 @@ public class ThunderSwordCore{
         GameRegistry.addRecipe(new ItemStack(itemThunderSword, 1), new Object[]{"X", "X", "Y", 'X', Items.iron_ingot, 'Y', Blocks.stone});
         GameRegistry.addRecipe(new ItemStack(itemExplosionSword, 1), new Object[]{" Y ", "YXY", " Y ", 'X', itemThunderSword, 'Y', Items.gunpowder});
         GameRegistry.addRecipe(lightsword, new Object[]{"YYY", "YXY", "YYY", 'X', itemThunderSword, 'Y', Blocks.glowstone});
-        GameRegistry.addRecipe(new ItemStack(this.itemTeleportSword, 1),new Object[]{ "YXY",'X',this.itemExplosionSword ,'Y',Items.ender_pearl });
+        GameRegistry.addRecipe(new ItemStack(this.itemTeleportSword, 1), new Object[]{"YXY", 'X', this.itemExplosionSword, 'Y', Items.ender_pearl});
         GameRegistry.addShapelessRecipe(new ItemStack(itemTntSword, 1), new Object[]{new ItemStack(itemExplosionSword, 1), new ItemStack(Items.flint_and_steel, 1), new ItemStack(Blocks.tnt, 1)});
         GameRegistry.addRecipe(new ItemStack(itemTntPickaxe, 1), new Object[]{"YYY", " X ", " Z ", 'X', itemTntSword, 'Y', Items.iron_ingot, 'Z', Items.stick});
         GameRegistry.addRecipe(new ItemStack(itemCreeperPickaxe, 1), new Object[]{"YYY", " X ", " Z ", 'X', itemTntPickaxe, 'Y', Items.diamond, 'Z', Items.stick});
@@ -139,7 +139,7 @@ public class ThunderSwordCore{
         GameRegistry.addRecipe(new ItemStack(itemBoneMealSword), new Object[]{" B ", " B ", " T ", 'B', Items.bone, 'T', itemTntSword});
         GameRegistry.addShapelessRecipe(new ItemStack(itemPickHoe, 1), new Object[]{new ItemStack(itemBoneMealSword, 1), new ItemStack(Items.wooden_hoe, 1)});
         GameRegistry.addRecipe(new ItemStack(itemTileWatcher), new Object[]{"PPP", "PBP", "PPP", 'B', Items.ender_eye, 'P', Items.paper});
-        GameRegistry.addShapelessRecipe(new ItemStack(itemEdibleSword, 1), new Object[]{new ItemStack(Items.poisonous_potato, 1), new ItemStack(Items.iron_sword, 1), new ItemStack(Items.cooked_beef, 1),new ItemStack(Items.cooked_chicken, 1),new ItemStack(Items.cooked_fished, 1),new ItemStack(Items.cooked_porkchop, 1),new ItemStack(Items.spider_eye, 1),new ItemStack(Items.rotten_flesh, 1),new ItemStack(Items.rotten_flesh, 1)});
+        GameRegistry.addShapelessRecipe(new ItemStack(itemEdibleSword, 1), new Object[]{new ItemStack(Items.poisonous_potato, 1), new ItemStack(Items.iron_sword, 1), new ItemStack(Items.cooked_beef, 1), new ItemStack(Items.cooked_chicken, 1), new ItemStack(Items.cooked_fished, 1), new ItemStack(Items.cooked_porkchop, 1), new ItemStack(Items.spider_eye, 1), new ItemStack(Items.rotten_flesh, 1), new ItemStack(Items.rotten_flesh, 1)});
         GameRegistry.addSmelting(itemRustySword, new ItemStack(itemTimeSword, 1), 0.1F);
         ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(itemRustySword), 1, 1, 3));
         ChestGenHooks.getInfo(DUNGEON_CHEST).setMax(10);

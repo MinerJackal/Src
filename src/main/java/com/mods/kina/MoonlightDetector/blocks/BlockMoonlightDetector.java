@@ -95,27 +95,27 @@ public class BlockMoonlightDetector extends BlockContainer{
             //if (i2 < 0) {
             //if(isOverAir){
 
-                if(/*(a >= 0) && (a < 12000)*/world.isDaytime()){
-                    i1 = 0;
+            if(/*(a >= 0) && (a < 12000)*/world.isDaytime()){
+                i1 = 0;
+            }else{
+
+                if(b == 1.0F){
+                    i1 = 15;
+                }else if(b == 0.75F){
+                    i1 = 12;
+                }else if(b == 0.5F){
+                    i1 = 9;
+                }else if(b == 0.25F){
+                    i1 = 6;
                 }else{
-
-                    if(b == 1.0F){
-                        i1 = 15;
-                    }else if(b == 0.75F){
-                        i1 = 12;
-                    }else if(b == 0.5F){
-                        i1 = 9;
-                    }else if(b == 0.25F){
-                        i1 = 6;
-                    }else{
-                        i1 = 3;
-                    }
-
+                    i1 = 3;
                 }
-                //}
-                if(l != i1){
-                    world.setBlockMetadataWithNotify(x, y, z, i1, 3);
-                }
+
+            }
+            //}
+            if(l != i1){
+                world.setBlockMetadataWithNotify(x, y, z, i1, 3);
+            }
             //}
         }
     }

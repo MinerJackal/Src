@@ -9,7 +9,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -39,7 +38,7 @@ public class ItemTeleportSword extends ItemSword{
         }*/
         Random rand = new Random();
         if(!(par3EntityLivingBase instanceof EntityAgeable) && !par3EntityLivingBase.worldObj.isRemote){
-            par2EntityPlayer.addChatMessage(new ChatComponentText(getEntityString(par3EntityLivingBase)+"\u306F\u8EE2\u9001\u3067\u304D\u307E\u305B\u3093"));
+            par2EntityPlayer.addChatMessage(new ChatComponentText(getEntityString(par3EntityLivingBase) + "\u306F\u8EE2\u9001\u3067\u304D\u307E\u305B\u3093"));
         }else{
             if(posx == 0 && posy == 0 && posz == 0){
                 par2EntityPlayer.addChatMessage(new ChatComponentText("\u5730\u70B9\u3092\u767B\u9332\u3057\u3066\u304F\u3060\u3055\u3044"));
@@ -47,7 +46,7 @@ public class ItemTeleportSword extends ItemSword{
                 if(!par3EntityLivingBase.worldObj.isRemote){
 
                     //entity.worldObj.spawnParticle("portal", entity.posX + (rand.nextDouble() - 0.5D) * (double)entity.width, entity.posY + rand.nextDouble() * (double)entity.height - 0.25D, entity.posZ + (rand.nextDouble() - 0.5D) * (double)entity.width, (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
-                    par3EntityLivingBase.setPosition((double)posx, (double)posy + 1, (double)posz);
+                    par3EntityLivingBase.setPosition((double) posx, (double) posy + 1, (double) posz);
                     par2EntityPlayer.addChatMessage(new ChatComponentText("\u4F4D\u7F6E" + posx + "," + posy + "," + posz + "\u306B" + getEntityString(par3EntityLivingBase) + "\u3092\u8EE2\u9001\u3057\u307E\u3057\u305F"));
                     par1ItemStack.damageItem((int) par3EntityLivingBase.getHealth(), par3EntityLivingBase);
                     flag = true;
@@ -60,6 +59,7 @@ public class ItemTeleportSword extends ItemSword{
                 }
             }
         }
+
         return flag;
     }
 

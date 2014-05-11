@@ -11,17 +11,18 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 @Mod(modid = "moonlightdetector", version = "1.0.0")
-public class MoonlightDetectorCore {
+public class MoonlightDetectorCore{
     public static Block blockMoonlightDetector;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
         blockMoonlightDetector = (new BlockMoonlightDetector());
-        GameRegistry.registerBlock(blockMoonlightDetector,"kina_blockMoonlightDetector");
+        GameRegistry.registerBlock(blockMoonlightDetector, "kina_blockMoonlightDetector");
     }
+
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event)
-    {
+    public void init(FMLInitializationEvent event){
         GameRegistry.registerTileEntity(TileEntityMoonlightDetector.class, "TileEntityMoonlightDetector");
-        GameRegistry.addRecipe(new ItemStack(blockMoonlightDetector, 1), new Object[]{"XXX", "HDH", "HRH", 'X', Blocks.obsidian, 'H', Blocks.end_stone, 'D',Blocks.daylight_detector,'R',Blocks.redstone_torch});
+        GameRegistry.addRecipe(new ItemStack(blockMoonlightDetector, 1), new Object[]{"XXX", "HDH", "HRH", 'X', Blocks.obsidian, 'H', Blocks.end_stone, 'D', Blocks.daylight_detector, 'R', Blocks.redstone_torch});
     }
 }
