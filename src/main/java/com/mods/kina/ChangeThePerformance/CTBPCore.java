@@ -7,9 +7,11 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemFood;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fluids.FluidRegistry;
 
 import java.io.File;
 import java.util.regex.Matcher;
@@ -20,7 +22,7 @@ public class CTBPCore{
     public final static String BLOCK = "Block";
     public final static String ITEM = "Item";
     public static final String FOOD = "ItemFood";
-    public static final String Fluid="Fluid"
+    public static final String FLUID = "Fluid";
     public static String lightOpacity;
     public static String hardness;
     public static String resistance;
@@ -36,6 +38,10 @@ public class CTBPCore{
     public static String full3D;
     public static String alwaysEdible;
     public static String potionEffectF;
+    public static String fluidLuminosity;
+    public static String fluidDensity;
+    public static String fluidTemperature;
+    public static String fluidViscosity;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
@@ -57,6 +63,10 @@ public class CTBPCore{
             full3D = config.get(ITEM, "HoldToolLike_Item", "", "set hold tool like \"Item;\"").getString();
             alwaysEdible = config.get(FOOD, "AlwaysEdible_Food", "", "set always edible \"Food;\"").getString();
             potionEffectF = config.get(FOOD, "PotionEffect_Food", "", "set potion effect \"Food,Effect(name or id),Duration,AmplifierLevel,Probability;\"Effects=(Speed,Slowness,Haste,MiningFatigue,Strength,InstantHealth,InstantDamage,JumpBoost,Nausea,Regeneration,Resistance,FireResistance,WaterBreathing,Invisibility,Blindness,NightVision,Hunger,Weakness,Poison,Wither,HealthBoost,Absorption,Saturation)").getString();
+            fluidLuminosity = config.get(FLUID, "LightLevel_Fluid", "", "set light level \"Fluid,Level\"").getString();
+            fluidDensity = config.get(FLUID, "Density_Fluid", "", "set density \"Fluid,Level\"").getString();
+            fluidTemperature = config.get(FLUID, "Temperature_Fluid", "", "set temperature \"Fluid,Degree\"").getString();
+            fluidViscosity = config.get(FLUID, "Viscosity_Fluid", "", "set viscosity \"Fluid,Level\"").getString();
         } catch(Exception e){
             FMLLog.severe("Error Message");
         }finally{
@@ -65,7 +75,8 @@ public class CTBPCore{
     }
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event){
+    public void Init(FMLInitializationEvent event){
+        //Block
         if(!lightOpacity.equals("")) for(String a : getSet1(lightOpacity))
             Block.getBlockFromName(getSet2(a)[0]).setLightOpacity(Integer.valueOf(getSet2(a)[1]));
         if(!hardness.equals("")) for(String a : getSet1(hardness))
@@ -80,6 +91,7 @@ public class CTBPCore{
             Block.getBlockFromName(getSet2(a)[0]).setStepSound(getSound(getSet2(a)[1]));
         if(!harvestLevelB.equals("")) for(String a : getSet1(harvestLevelB))
             Block.getBlockFromName(getSet2(a)[0]).setHarvestLevel(getSet2(a)[1], Integer.valueOf(getSet2(a)[2]));
+        //Item
         if(!creativeTabI.equals("")) for(String a : getSet1(creativeTabI))
             getItemFromName(getSet2(a)[0]).setCreativeTab(getTab(getSet2(a)[1]));
         if(!maxDamage.equals("")) for(String a : getSet1(maxDamage))
@@ -92,10 +104,20 @@ public class CTBPCore{
             getItemFromName(getSet2(a)[0]).setHarvestLevel(getSet2(a)[1], Integer.valueOf(getSet2(a)[2]));
         if(!full3D.equals("")) for(String a : getSet1(full3D))
             getItemFromName(a).setFull3D();
+        //Food
         if(!alwaysEdible.equals("")) for(String a : getSet1(alwaysEdible))
             getItemFoodFromName(a).setAlwaysEdible();
         if(!potionEffectF.equals("")) for(String a : getSet1(potionEffectF))
             getItemFoodFromName(getSet2(a)[0]).setPotionEffect(getPotionIdFromName(getSet2(a)[1]), Integer.valueOf(getSet2(a)[2]), Integer.valueOf(getSet2(a)[3]), Float.valueOf(getSet2(a)[4] + "f"));
+        //Fluid
+        if(!fluidLuminosity.equals("")) for(String a : getSet1(fluidLuminosity))
+            FluidRegistry.getFluid(getSet2(a)[0]).setLuminosity(Integer.valueOf(getSet2(a)[1]));
+        if(!fluidDensity.equals("")) for(String a : getSet1(fluidDensity))
+            FluidRegistry.getFluid(getSet2(a)[0]).setDensity(Integer.valueOf(getSet2(a)[1]));
+        if(!fluidTemperature.equals("")) for(String a : getSet1(fluidTemperature))
+            FluidRegistry.getFluid(getSet2(a)[0]).setTemperature(Integer.valueOf(getSet2(a)[1]));
+        if(!fluidViscosity.equals("")) for(String a : getSet1(fluidViscosity))
+            FluidRegistry.getFluid(getSet2(a)[0]).setViscosity(Integer.valueOf(getSet2(a)[1]));
     }
 
     public CreativeTabs getTab(String s){
@@ -109,7 +131,7 @@ public class CTBPCore{
         else if(s.equalsIgnoreCase("Redstone")) return CreativeTabs.tabRedstone;
         else if(s.equalsIgnoreCase("Tools")) return CreativeTabs.tabTools;
         else if(s.equalsIgnoreCase("Transport")) return CreativeTabs.tabTransport;
-        else return null;
+        else return (CreativeTabs)getClassFromName(s);
     }
 
     public Block.SoundType getSound(String s){
@@ -186,6 +208,19 @@ public class CTBPCore{
 
     public ItemFood getItemFoodFromName(String s){
         return (ItemFood) getItemFromName(s);
+    }
+
+    public ItemBlock getItemBlockFromName(String s){
+        return (ItemBlock) Item.getItemFromBlock(Block.getBlockFromName(s));
+    }
+
+    public Object getClassFromName(String s){
+        try{
+            return Class.forName(s);
+        }catch(ClassNotFoundException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public String[] getSet1(String s){
